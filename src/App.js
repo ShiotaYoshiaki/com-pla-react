@@ -38,7 +38,7 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 
-import { useInitialController, setCompany } from "context/Initial";
+import { useInitialController, init } from "context/Initial";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -57,7 +57,7 @@ export default function App() {
   const { pathname } = useLocation();
 
   const [initialController, initialDispatch] = useInitialController();
-  const { company } = initialController;
+  const { company, person } = initialController;
 
   // Cache for the rtl
   useMemo(() => {
@@ -89,7 +89,7 @@ export default function App() {
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
 
   useEffect(() => {
-    setCompany(initialDispatch);
+    init(initialDispatch);
   }, []);
 
   // Setting the dir attribute for the body element
@@ -141,6 +141,7 @@ export default function App() {
   );
 
   const companyName = company.name || "test";
+  const routesData = routes(person.name, person.id, person.thumbnail_url);
 
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>
@@ -152,7 +153,7 @@ export default function App() {
               color={sidenavColor}
               brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
               brandName={companyName}
-              routes={routes}
+              routes={routesData}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
             />
@@ -162,7 +163,7 @@ export default function App() {
         )}
         {layout === "vr" && <Configurator />}
         <Routes>
-          {getRoutes(routes)}
+          {getRoutes(routesData)}
           <Route path="*" element={<Navigate to="/dashboards/analytics" />} />
         </Routes>
       </ThemeProvider>
@@ -176,7 +177,7 @@ export default function App() {
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
             brandName={companyName}
-            routes={routes}
+            routes={routesData}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
           />
@@ -186,7 +187,7 @@ export default function App() {
       )}
       {layout === "vr" && <Configurator />}
       <Routes>
-        {getRoutes(routes)}
+        {getRoutes(routesData)}
         <Route path="*" element={<Navigate to="/dashboards/analytics" />} />
       </Routes>
     </ThemeProvider>

@@ -4,13 +4,13 @@ const SKYWILL_INFO = {
   LOGO_URL: "https://www.skywill.jp/img/logo.png",
 };
 
-export const getCompanyBasic = () => ({
+export const getSelfCompanyBasic = () => ({
   id: SKYWILL_INFO.ID,
   name: SKYWILL_INFO.NAME,
   logo_url: SKYWILL_INFO.LOGO_URL,
 });
 
-export const fetchCompanyDetail = () => ({
+export const fetchSelfCompanyDetail = () => ({
   id: SKYWILL_INFO.ID,
   name: SKYWILL_INFO.NAME,
   logo_url: SKYWILL_INFO.LOGO_URL,

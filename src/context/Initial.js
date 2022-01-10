@@ -4,14 +4,12 @@ import * as ApiCalls from "api/ApiCalls";
 import ErrorMessage from "config/ErrorMessage";
 
 const Initial = createContext();
-
-// Setting custom name for the context which is visible on react dev tools
 Initial.displayName = "InitialContext";
 
 function reducer(state, action) {
   switch (action.type) {
-    case "COMPANY": {
-      return { ...state, company: action.value };
+    case "INIT": {
+      return { ...state, ...action.value };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -22,9 +20,14 @@ function reducer(state, action) {
 function InitialProvider({ children }) {
   const initialState = {
     company: {
-      name: "",
       id: "",
+      name: "",
       logo_url: "",
+    },
+    person: {
+      id: "",
+      name: "",
+      thumbnail_url: "",
     },
   };
   const [initialController, initialDispatch] = useReducer(reducer, initialState);
@@ -45,10 +48,14 @@ InitialProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const setCompany = (dispatch) => {
-  const basicCompany = ApiCalls.company.getBasic();
-  const value = basicCompany;
-  return dispatch({ type: "COMPANY", value });
+const init = (dispatch) => {
+  const selfCompany = ApiCalls.company.getSelfBasic();
+  const selfEmployee = ApiCalls.person.getSelfBasic();
+  const value = {
+    company: selfCompany,
+    person: selfEmployee,
+  };
+  return dispatch({ type: "INIT", value });
 };
 
-export { InitialProvider, useInitialController, setCompany };
+export { InitialProvider, useInitialController, init };

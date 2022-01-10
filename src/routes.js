@@ -1,19 +1,4 @@
 /**
-=========================================================
-* Material Dashboard 2 PRO React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-/** 
   All of the routes for the Material Dashboard 2 PRO React are added here,
   You can add a new route, customize the routes and delete the routes here.
 
@@ -71,15 +56,12 @@ import MDAvatar from "components/MDAvatar";
 // @mui icons
 import Icon from "@mui/material/Icon";
 
-// Images
-import profilePicture from "assets/images/team-3.jpg";
-
-const routes = [
+const routes = (personName, personKey, personThumbnailURL) => [
   {
     type: "collapse",
-    name: "Brooklyn Alice",
-    key: "brooklyn-alice",
-    icon: <MDAvatar src={profilePicture} alt="Brooklyn Alice" size="sm" />,
+    name: personName,
+    key: personKey,
+    icon: <MDAvatar src={personThumbnailURL} alt={personName} size="sm" />,
     collapse: [
       {
         name: "My Profile",
