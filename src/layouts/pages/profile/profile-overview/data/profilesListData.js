@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 PRO React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // Images
 import kal from "assets/images/kal-visuals-square.jpg";
 import marie from "assets/images/marie.jpg";
@@ -23,8 +8,8 @@ import team4 from "assets/images/team-4.jpg";
 export default [
   {
     image: kal,
-    name: "Sophie B.",
-    description: "Hi! I need more information..",
+    name: "茂木陵介",
+    description: "先日の座席管理についてですが、",
     action: {
       type: "internal",
       route: "/pages/profile/profile-overview",
@@ -34,8 +19,8 @@ export default [
   },
   {
     image: marie,
-    name: "Anne Marie",
-    description: "Awesome work, can you..",
+    name: "嶋田",
+    description: "了解です。ありがとうございます。",
     action: {
       type: "internal",
       route: "/pages/profile/profile-overview",
@@ -45,8 +30,8 @@ export default [
   },
   {
     image: ivana,
-    name: "Ivanna",
-    description: "About files I can..",
+    name: "田渕",
+    description: "顧客との打ち合わせの結果ですが、",
     action: {
       type: "internal",
       route: "/pages/profile/profile-overview",
@@ -56,8 +41,8 @@ export default [
   },
   {
     image: team4,
-    name: "Peterson",
-    description: "Have a great afternoon..",
+    name: "真木",
+    description: "次の打ち合わせの日程について",
     action: {
       type: "internal",
       route: "/pages/profile/profile-overview",
@@ -67,8 +52,8 @@ export default [
   },
   {
     image: team3,
-    name: "Nick Daniel",
-    description: "Hi! I need more information..",
+    name: "先端技術研究室",
+    description: "ユニット会のお知らせ",
     action: {
       type: "internal",
       route: "/pages/profile/profile-overview",

@@ -1,7 +1,7 @@
 // import axios from 'axios';
 
 import { getSelfCompanyBasic, fetchSelfCompanyDetail } from "mocks/company";
-import { getSelfPerson } from "mocks/person";
+import { fetchSelfDetailPerson, getSelfPerson } from "mocks/person";
 
 export const company = {
   getSelfBasic: () => {
@@ -17,6 +17,10 @@ export const company = {
 export const person = {
   getSelfBasic: () => {
     const res = getSelfPerson();
+    return res;
+  },
+  getSelfProfile: () => {
+    const res = fetchSelfDetailPerson();
     return res;
   },
 };

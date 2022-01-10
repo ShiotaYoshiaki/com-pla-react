@@ -28,6 +28,7 @@ function InitialProvider({ children }) {
       id: "",
       name: "",
       thumbnail_url: "",
+      position: "",
     },
   };
   const [initialController, initialDispatch] = useReducer(reducer, initialState);

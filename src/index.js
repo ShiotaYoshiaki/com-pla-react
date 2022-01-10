@@ -4,12 +4,15 @@ import { BrowserRouter } from "react-router-dom";
 import App from "App";
 import { MaterialUIControllerProvider } from "context";
 import { InitialProvider } from "context/Initial";
+import { SelfProfileProvider } from "context/selfProfile";
 
 ReactDOM.render(
   <BrowserRouter>
     <MaterialUIControllerProvider>
       <InitialProvider>
-        <App />
+        <SelfProfileProvider>
+          <App />
+        </SelfProfileProvider>
       </InitialProvider>
     </MaterialUIControllerProvider>
   </BrowserRouter>,

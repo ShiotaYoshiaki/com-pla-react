@@ -25,7 +25,6 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 
-// Images
 import burceMars from "assets/images/bruce-mars.jpg";
 
 function Header() {
