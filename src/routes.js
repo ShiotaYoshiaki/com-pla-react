@@ -55,6 +55,7 @@ import MDAvatar from "components/MDAvatar";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import Chat from "layouts/applications/chat";
 
 const routes = (personName, personKey, personThumbnailURL) => [
   {
@@ -223,6 +224,12 @@ const routes = (personName, personKey, personThumbnailURL) => [
         key: "calendar",
         route: "/applications/calendar",
         component: <Calendar />,
+      },
+      {
+        name: "Chat",
+        key: "chat",
+        route: "/applications/chat",
+        component: <Chat />,
       },
     ],
   },
