@@ -28,12 +28,13 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 import team5 from "assets/images/team-5.jpg";
+import Category from "./Category";
 
 export default {
   columns: [
     {
       id: uuidv4(),
-      title: "Backlog",
+      title: "未着手",
       cards: [
         {
           id: uuidv4(),
@@ -47,8 +48,19 @@ export default {
           id: uuidv4(),
           template: (
             <Card
+              badge={Category.DEVELOP}
+              content="アカウント一覧を作成する。デザインはここを参照する https://demos.wrappixel.com/premium-admin-templates/react/flexy-react/main/#/customers/lists"
+              attachedFiles={9}
+              members={[team2, team3]}
+            />
+          ),
+        },
+        {
+          id: uuidv4(),
+          template: (
+            <Card
               image={officeDark}
-              badge={{ color: "dark", label: "pending" }}
+              badge={Category.PENDING}
               content="Website Design: New cards for blog section and profile details"
               attachedFiles={3}
               members={[team1, team2, team3]}
@@ -59,13 +71,33 @@ export default {
     },
     {
       id: uuidv4(),
-      title: "In progress",
+      title: "処理中",
       cards: [
         {
           id: uuidv4(),
           template: (
             <Card
-              badge={{ color: "error", label: "errors" }}
+              badge={Category.DEVELOP}
+              content="カンバンを使える状態にする"
+              members={[team2, team3]}
+            />
+          ),
+        },
+        {
+          id: uuidv4(),
+          template: (
+            <Card
+              badge={Category.DEVELOP}
+              content="チャットのレイアウトを作る。https://demos.wrappixel.com/premium-admin-templates/react/flexy-react/main/#/chats"
+              members={[team2, team3]}
+            />
+          ),
+        },
+        {
+          id: uuidv4(),
+          template: (
+            <Card
+              badge={Category.ERROR}
               content="Fix firefox errors"
               attachedFiles={9}
               members={[team2, team3]}
@@ -76,7 +108,7 @@ export default {
           id: uuidv4(),
           template: (
             <Card
-              badge={{ color: "info", label: "updates" }}
+              badge={Category.UPDATE}
               content="Argon Dashboard PRO - React"
               attachedFiles={3}
               members={[team5, team4]}
@@ -88,7 +120,7 @@ export default {
           template: (
             <Card
               image={meeting}
-              badge={{ color: "info", label: "updates" }}
+              badge={Category.UPDATE}
               content="ReactJS v17 Updates"
               attachedFiles={3}
               members={[team1, team2, team3]}
@@ -99,13 +131,13 @@ export default {
     },
     {
       id: uuidv4(),
-      title: "In review",
+      title: "レビュー待ち",
       cards: [
         {
           id: uuidv4(),
           template: (
             <Card
-              badge={{ color: "warning", label: "in testing" }}
+              badge={Category.TEST}
               content="Responsive Changes"
               attachedFiles={11}
               members={[team3, team2]}
@@ -116,7 +148,7 @@ export default {
           id: uuidv4(),
           template: (
             <Card
-              badge={{ color: "success", label: "in review" }}
+              badge={Category.REVIEW}
               content="Change images dimension"
               progress={80}
               members={[team3]}
@@ -127,7 +159,7 @@ export default {
           id: uuidv4(),
           template: (
             <Card
-              badge={{ color: "info", label: "in review" }}
+              badge={Category.REVIEW}
               content="Update links"
               progress={60}
               attachedFiles={6}
@@ -139,14 +171,34 @@ export default {
     },
     {
       id: uuidv4(),
-      title: "Done",
+      title: "完了",
       cards: [
         {
           id: uuidv4(),
           template: (
             <Card
+              badge={Category.DONE}
+              content="Profileページの作成"
+              members={[team5, team1, team4]}
+            />
+          ),
+        },
+        {
+          id: uuidv4(),
+          template: (
+            <Card
+              badge={Category.DONE}
+              content="サイドメニューのサンプル情報を置き換える"
+              members={[team5, team1, team4]}
+            />
+          ),
+        },
+        {
+          id: uuidv4(),
+          template: (
+            <Card
               image={homeDecore}
-              badge={{ color: "success", label: "done" }}
+              badge={Category.DONE}
               content="Redesign for the home page"
               attachedFiles={8}
               members={[team5, team1, team4]}
@@ -157,7 +209,7 @@ export default {
           id: uuidv4(),
           template: (
             <Card
-              badge={{ color: "success", label: "done" }}
+              badge={Category.DONE}
               content="Schedule winter campaign"
               attachedFiles={2}
               members={[team1, team4]}
