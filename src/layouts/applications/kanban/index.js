@@ -25,11 +25,11 @@ import Footer from "examples/Footer";
 
 // Kanban application components
 import Header from "layouts/applications/kanban/components/Header";
-import Card from "layouts/applications/kanban/components/Card";
+// import Card from "layouts/applications/kanban/components/Card";
 
 // Material Dashboard 2 PRO React context
 import { useMaterialUIController } from "context";
-import { fetchProjectTask } from "config/apiCalls";
+import { useTaskController, fetchTask, addTask } from "context/Task";
 
 function Kanban() {
   const [controller] = useMaterialUIController();
@@ -37,56 +37,31 @@ function Kanban() {
 
   const [newCardForm, setNewCardForm] = useState(false);
   const [formValue, setFormValue] = useState("");
-  const [tasks, setTasks] = useState({ columns: [] });
+
+  const [taskController, taskDispatch] = useTaskController();
+  const { selected } = taskController;
 
   const openNewCardForm = (event, id) => setNewCardForm(id);
   const closeNewCardForm = () => setNewCardForm(false);
   const handeSetFormValue = ({ currentTarget }) => setFormValue(currentTarget.value);
 
-  const fetchTasks = async () => {
-    const projectTasks = await fetchProjectTask(1);
-    const cards = projectTasks.map((category) => {
-      const { id: categoryId, title: categoryTitle, template } = category;
-      const cardTemplate = template.map((card) => {
-        const { id: cardId, color, label, content, progress, members } = card;
-        const badge = {
-          label,
-          color,
-        };
-        return {
-          id: cardId,
-          template: <Card badge={badge} content={content} progress={progress} members={members} />,
-        };
-      });
-      return {
-        id: categoryId,
-        title: categoryTitle,
-        cards: cardTemplate,
-      };
-    });
-    const format = {
-      columns: cards,
+  const MOCK_PROJECT_ID = 1;
+  const MOCK_COMPANY_ID = 3;
+  const MOCK_CREATED_BY = 1;
+  const handleAddTask = async (categoryId) => {
+    const content = formValue;
+    const data = {
+      category_id: categoryId,
+      company_id: MOCK_COMPANY_ID,
+      project_id: MOCK_PROJECT_ID,
+      content,
+      created_by: MOCK_CREATED_BY,
     };
-    setTasks(format);
+    await addTask(data);
   };
 
-  // const putTask = async () => {
-  //   const info = {
-  //     category_id: 1,
-  //     company_id: 3,
-  //     project_id: 2,
-  //     urls: "['https://~~', 'https://~~',]",
-  //     color: "info",
-  //     label: "タスク",
-  //     content: "フロントのテスト",
-  //     created_by: 1,
-  //   };
-  //   putProjectTask(info);
-  // };
-
   useEffect(() => {
-    fetchTasks();
-    // putTask();
+    fetchTask(taskDispatch, MOCK_PROJECT_ID);
   }, []);
 
   return (
@@ -113,9 +88,9 @@ function Kanban() {
             },
           })}
         >
-          {tasks.columns.length ? (
+          {selected.tasks.columns.length ? (
             <Board
-              initialBoard={tasks}
+              initialBoard={selected.tasks}
               allowAddCard
               allowAddColumn
               renderColumnHeader={({ id, title }, { addCard }) => (
@@ -149,6 +124,7 @@ function Kanban() {
                           size="small"
                           onClick={() => {
                             addCard({ id: uuidv4(), template: formValue });
+                            handleAddTask(id);
                             setFormValue("");
                           }}
                         >

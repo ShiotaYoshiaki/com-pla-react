@@ -5,13 +5,16 @@ import App from "App";
 import { MaterialUIControllerProvider } from "context";
 import { InitialProvider } from "context/Initial";
 import { SelfProfileProvider } from "context/selfProfile";
+import { TaskProvider } from "context/Task";
 
 ReactDOM.render(
   <BrowserRouter>
     <MaterialUIControllerProvider>
       <InitialProvider>
         <SelfProfileProvider>
-          <App />
+          <TaskProvider>
+            <App />
+          </TaskProvider>
         </SelfProfileProvider>
       </InitialProvider>
     </MaterialUIControllerProvider>
