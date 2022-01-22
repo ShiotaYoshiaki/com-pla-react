@@ -37,12 +37,20 @@ import breakpoints from "assets/theme/base/breakpoints";
 // Images
 import backgroundImage from "assets/images/bg-profile.jpeg";
 import { useInitialController } from "context/Initial";
+import {
+  useProfileOverviewController,
+  handleOverviewMenu,
+} from "context/limitedEdition/ProfileOverview";
 
 function Header({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
-  const [tabValue, setTabValue] = useState(0);
+  // const [tabValue, setTabValue] = useState(0);
   const [initialController] = useInitialController();
   const { person } = initialController;
+  const [profileOverviewController, profileOverviewDispatch] = useProfileOverviewController();
+  const { overviewMenuValue } = profileOverviewController();
+  console.log("overviewMenuValue");
+  console.log(overviewMenuValue);
 
   useEffect(() => {
     // A function that sets the orientation state of the tabs.
@@ -64,7 +72,18 @@ function Header({ children }) {
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
 
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+  const handleSetTabValue = (event, newValue) =>
+    handleOverviewMenu(profileOverviewDispatch, newValue);
+  const eachTab = (label, iconKey) => (
+    <Tab
+      label={label}
+      icon={
+        <Icon fontSize="small" sx={{ mt: -0.25 }}>
+          {iconKey}
+        </Icon>
+      }
+    />
+  );
 
   return (
     <MDBox position="relative" mb={5}>
@@ -110,31 +129,15 @@ function Header({ children }) {
           </Grid>
           <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
-              <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
-                <Tab
-                  label="App"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      home
-                    </Icon>
-                  }
-                />
-                <Tab
-                  label="Message"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      email
-                    </Icon>
-                  }
-                />
-                <Tab
-                  label="Settings"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      settings
-                    </Icon>
-                  }
-                />
+              <Tabs
+                orientation={tabsOrientation}
+                value={overviewMenuValue}
+                onChange={handleSetTabValue}
+              >
+                {eachTab("アプリ", "home")}
+                {eachTab("メッセージ", "email")}
+                {eachTab("スキル", "laptopChromebook")}
+                {eachTab("設定", "settings")}
               </Tabs>
             </AppBar>
           </Grid>

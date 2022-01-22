@@ -56,6 +56,7 @@ import MDAvatar from "components/MDAvatar";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import Chat from "layouts/applications/chat";
+import { ProfileOverviewProvider } from "context/limitedEdition/ProfileOverview";
 
 const routes = (personName, personKey, personThumbnailURL) => [
   {
@@ -120,7 +121,11 @@ const routes = (personName, personKey, personThumbnailURL) => [
             name: "Profile Overview",
             key: "profile-overview",
             route: "/pages/profile/profile-overview",
-            component: <ProfileOverview />,
+            component: (
+              <ProfileOverviewProvider>
+                <ProfileOverview />
+              </ProfileOverviewProvider>
+            ),
           },
           {
             name: "All Projects",
