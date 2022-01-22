@@ -35,4 +35,8 @@ export const task = {
     await call(HTTP_METHOD.put, URLs.TASK(), data);
     return null;
   },
+  patchForKanban: async (data) => {
+    await call(HTTP_METHOD.patch, URLs.TASK_KANBAN(), data);
+    return null;
+  },
 };

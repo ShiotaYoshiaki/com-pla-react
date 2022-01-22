@@ -29,7 +29,7 @@ import Header from "layouts/applications/kanban/components/Header";
 
 // Material Dashboard 2 PRO React context
 import { useMaterialUIController } from "context";
-import { useTaskController, fetchTask, addTask } from "context/Task";
+import { useTaskController, fetchTask, addTask, handleTask } from "context/Task";
 
 function Kanban() {
   const [controller] = useMaterialUIController();
@@ -58,6 +58,10 @@ function Kanban() {
       created_by: MOCK_CREATED_BY,
     };
     await addTask(data);
+  };
+  const handleDrag = async (e) => {
+    const eventParam = JSON.stringify(e);
+    await handleTask(eventParam, MOCK_PROJECT_ID);
   };
 
   useEffect(() => {
@@ -89,6 +93,7 @@ function Kanban() {
           })}
         >
           {selected.tasks.columns.length ? (
+            // https://github.com/asseinfo/react-kanban
             <Board
               initialBoard={selected.tasks}
               allowAddCard
@@ -168,6 +173,7 @@ function Kanban() {
                 </MDBox>
               )}
               onCardNew={() => null}
+              onCardDragEnd={handleDrag}
             />
           ) : null}
         </MDBox>

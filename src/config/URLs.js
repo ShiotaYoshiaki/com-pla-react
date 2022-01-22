@@ -7,4 +7,5 @@ const apiPath = `${host}:${port}/${version}`;
 export default {
   TASK: () => `${apiPath}/task`,
   TASK_PROJECT: (projectId) => `${apiPath}/task/${projectId}`,
+  TASK_KANBAN: () => `${apiPath}/task/kanban`,
 };

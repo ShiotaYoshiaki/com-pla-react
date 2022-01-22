@@ -107,4 +107,12 @@ const addTask = async (data) => {
   await ApiCalls.task.putProjectTask(data);
 };
 
-export { TaskProvider, useTaskController, fetchTask, addTask };
+const handleTask = async (kanbanData, projectId) => {
+  const data = {
+    kanban_data: kanbanData,
+    project_id: projectId,
+  };
+  await ApiCalls.task.patchForKanban(data);
+};
+
+export { TaskProvider, useTaskController, fetchTask, addTask, handleTask };
