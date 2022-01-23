@@ -35,13 +35,13 @@ function ProfileOverviewProvider({ children }) {
 function useProfileOverviewController() {
   const context = useContext(ProfileOverview);
   if (!context) {
-    throw new Error(ErrorMessage.CONTEXT_INITIAL_ERROR);
+    throw new Error(ErrorMessage.CONTEXT_PROFILE_OVERVIEW_ERROR);
   }
   return context;
 }
 
 function handleOverviewMenu(dispatch, value) {
-  return dispatch({ type: "FETCH_PROJECT_TASK", value });
+  return dispatch({ type: "CHANGE_OVERVIEW_MENU", value });
 }
 
 ProfileOverviewProvider.propTypes = {

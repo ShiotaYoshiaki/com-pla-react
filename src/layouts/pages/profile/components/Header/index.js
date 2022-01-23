@@ -48,9 +48,7 @@ function Header({ children }) {
   const [initialController] = useInitialController();
   const { person } = initialController;
   const [profileOverviewController, profileOverviewDispatch] = useProfileOverviewController();
-  const { overviewMenuValue } = profileOverviewController();
-  console.log("overviewMenuValue");
-  console.log(overviewMenuValue);
+  const { overviewMenuValue } = profileOverviewController;
 
   useEffect(() => {
     // A function that sets the orientation state of the tabs.

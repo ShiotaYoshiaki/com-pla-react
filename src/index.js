@@ -6,6 +6,7 @@ import { MaterialUIControllerProvider } from "context";
 import { InitialProvider } from "context/Initial";
 import { SelfProfileProvider } from "context/selfProfile";
 import { TaskProvider } from "context/Task";
+import { ProfileOverviewProvider } from "context/limitedEdition/ProfileOverview";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -13,7 +14,9 @@ ReactDOM.render(
       <InitialProvider>
         <SelfProfileProvider>
           <TaskProvider>
-            <App />
+            <ProfileOverviewProvider>
+              <App />
+            </ProfileOverviewProvider>
           </TaskProvider>
         </SelfProfileProvider>
       </InitialProvider>
