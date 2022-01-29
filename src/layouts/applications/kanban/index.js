@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect, useState } from "react";
 
 // @asseinfo/react-kanban components
@@ -25,11 +27,11 @@ import Footer from "examples/Footer";
 
 // Kanban application components
 import Header from "layouts/applications/kanban/components/Header";
-// import Card from "layouts/applications/kanban/components/Card";
+import Modal from "layouts/applications/kanban/components/Modal";
 
 // Material Dashboard 2 PRO React context
 import { useMaterialUIController } from "context";
-import { useTaskController, fetchTask, addTask, handleTask } from "context/Task";
+import { useTaskController, fetchTask, addTask, handleTask, clickTaskCard } from "context/Task";
 
 function Kanban() {
   const [controller] = useMaterialUIController();
@@ -60,10 +62,11 @@ function Kanban() {
     await addTask(data);
   };
   const handleDrag = async (e) => {
-    const eventParam = JSON.stringify(e);
-    await handleTask(eventParam, MOCK_PROJECT_ID);
+    await handleTask(e, MOCK_PROJECT_ID);
   };
-
+  const handleTaskCard = async (template) => {
+    await clickTaskCard(taskDispatch, template, selected.tasks);
+  };
   useEffect(() => {
     fetchTask(taskDispatch, MOCK_PROJECT_ID);
   }, []);
@@ -169,7 +172,9 @@ function Kanban() {
                     fontSize: ({ typography: { size } }) => size.md,
                   }}
                 >
-                  {typeof template === "string" ? ReactHtmlParser(template) : template}
+                  <p onClick={() => handleTaskCard(template)}>
+                    {typeof template === "string" ? ReactHtmlParser(template) : template}
+                  </p>
                 </MDBox>
               )}
               onCardNew={() => null}
@@ -178,6 +183,7 @@ function Kanban() {
           ) : null}
         </MDBox>
       </MDBox>
+      <Modal />
       <Footer />
     </DashboardLayout>
   );

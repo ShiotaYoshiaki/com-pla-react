@@ -1,5 +1,5 @@
 const SKYWILL_INFO = {
-  ID: "0001",
+  ID: "3",
   NAME: "(株)スカイウイル",
   LOGO_URL: "https://www.skywill.jp/img/logo.png",
 };
